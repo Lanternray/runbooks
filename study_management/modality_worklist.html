@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Modality Worklist</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>Modality Worklist</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>Orders that are expected to appear on the worklist are not showing. The Modality Worklist is a list of exams to be performed on the device, that is displayed physically on the modality itself (X-Ray machine for example). This is a Radiology order placed in Millennium, and our worklist service returns the exams based on the room the exam's routed to and how the imaging device is configured in the system.</p>
+    <p><strong><span id="highlight">Note:</span></strong> The modality worklist does NOT always mean it will be our (CAMM) worklist service. Many clients may rather be pointed to an interfaced worklist/broker that supplies a worklist via HL7. If they use our worklist, the device would be pointed to a worklist AET of "MWL_CERNER" (default AET, but has the potential to be defined differently.) This would be configured on the app node in $cer_mgr\java-system.cerner within the 'QRSCP' section:</p>
+    <div class="code-snippet">
+        QRSCP <br>
+        &lcub; <br>
+        Port = "2280" <br>
+        MaxClient = "30" <br>
+        AETitle = "MWL_CERNER"</div>
+
+    <h2>ITEMS FOR INVESTIGATION</h2>
+    <ul>
+        <li><span id="highlight">Accession for example</span> that should appear on the worklist. Note that if this exam is completed, it will drop from the worklist - so would no longer be valid for testing. But you can still use this to start the investigation to see how it's routed. If it looks correct, they may have changed what room it routed to in order to complete the exam - so they may need to place a test order for us to investigate while it's still In Progress.</li>
+        <li><span id="highlight">Modality Configuration - client side</span>. This has to be provided by the client, as the settings for how they're pulling the worklist is physically defined on the machine itself <br>
+            These are the details to request. Bear in mind that the client may have their own verbiage for how they identify these items. It's up to YOU to understand this and work with the client to get the information you need.
+            <ul>
+                <li>Device/Local AE Title</li>
+                <li>Remote/Worklist AE Title</li>
+                <li>Remote/Worklist IP/Hostname</li>
+                <li>Remote/Worklist Port <em>(by default, this is always 2280. It may be set differently in the same java-system.cerner file mentioned above)</em></li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>STEPS</h2>
+    <p>Firstly, check to ensure that the <span id="highlight">exam's routed to a room that's associated to the imaging device</span>. The worklist queries by AET for all orders that routed to the exam rooms associated to the device (in IMDBTools.exe \ DICOM AE Def). Therefore, if it does not route to one of those allocated rooms, it does not qualify for the worklist.</p>
+
+    <div class="code-snippet">
+        select orad.accession, rex.service_resource_cd <br>
+        from order_radiology orad, rad_exam rex <br>
+        where orad.accession = 'enterFormattedAccession' <br>
+        and orad.order_id = rex.order_id with uar_code(d)</div>
+
+    <p>Take note of the service_resource_cd, this is room they order routed to. Enter into the next query.</p>
+    <div class="code-snippet">select imda.ae_title, imdr.service_resource_cd <br>
+        from im_device_activity imda, im_device_resource_r imdr <br>
+        where imdr.service_resource_cd = enterServiceResourceCd <br>
+        and imdr.im_device_id = imda.im_device_id with uar_code(d)</div>
+
+    <p>This returns all of the devices/AET's that the room is associated to.</p>
+    <p>Bear in mind, that this does not always mean a room should be associated to the device. Remember, that the room routing derives from Radiology's build for the procedure. If the room it's routing to is not appropriate, then this would need to be addressed by Radiology in their build. If the room is correct, it should be associated to the device.</p>
+    <p>If the above checks out, next verify that the <span id="highlight">encounter tied to the order is associated to an org that the SYSTEM user</span> (or whatever account is running SCP 353) <span id="highlight">has access to</span>. Encounter org security applies to the worklist. So if the order's encounter is for an organization that is not associated to the account running 353, it will not qualify for the worklist.</p>
+
+    <p>Find what org/ID the encounter is tied to.</p>
+    <div class="code-snippet">
+        select orad.accession, orad.encntr_id, o.organization_id, o.org_name <br>
+        from order_radiology orad, encounter e, organization o <br>
+        where orad.accession = 'enterFormattedAccession' <br>
+        and orad.encntr_id = e.encntr_id <br>
+        and e.organization_id = o.organization_id</div>
+
+    <p>Use the org ID to confirm it's associated to the account running SCP 353. By default this is SYSTEM.</p>
+    <div class="code-snippet">
+        select * from prsnl_org_reltn where organization_id = enterOrgId <br>
+        and person_id in ( select person_id from prsnl where username = 'SYSTEM')</div>
+
+    <p>If no rows returned, org is not associated to the account.</p>
+    <p>If the above checks out, <span id="highlight">next test with a modality simulator</span> (such as JDICOM or IQ_DICOMTest) from your end to see if the worklist does return the exam or not. If it does, that would indicate there's an issue with the device configuration client-side. 353 logs can help show what criteria they're searching by. <span id="highlight">Commonly, a "modality" filter may be filtering it out</span>. You can see what modality code is being returned in JDICOM. The alias is defined in codeset 5801.</p>
+
+    <p>You can also check in Millennium tables:</p>
+    <div class="code-snippet">select orad.order_id, orad.accession, orad.request_dt_tm, modality_type_cd=cva.alias <br>
+    from order_radiology orad, order_catalog oc, code_value cv, code_value_alias cva <br>
+    where orad.accession = 'enterFormattedAccession' <br>
+    and orad.catalog_cd = oc.catalog_cd <br>
+    and oc.activity_subtype_cd = cv.code_value <br>
+    and cv.code_value = cva.code_value <br>
+    and cva.code_set = 5801 and cva.contributor_source_cd in ( <br>
+    select code_value from code_value where code_set=73 and <br>
+    cdf_meaning = "POWERCHART")</div>
+
+    <p>This is defined by Radiology build which determines the activity subtype for the exam. If it needs to be corrected Millennium-side, that would be Radiology build. If it needs to be corrected on the client-side, Modality filter may need to be removed/reviewed.</p>
+    <p>If the above checks out, you will need to reproduce the issue and get <span id="highlight">353 trace logs</span>. Either by working with the client testing from their device, or with modality simulator if you can reproduce the issue from your end.</p>
+
+    <p>The following traces can be set for 353 to assist with finer logging:</p>
+    <div class="code-snippet">
+        com.cerner.service.dicom.qrscp.FindService <br>
+        -this one provides search criteria from querying device <br><br>
+        org.dcm4cheri.data.DcmObjectImpl <br>
+        -this one provides DICOM tags returned by the worklist service <br><br>
+        com.cerner.biz.modalityworklist <br>
+        -this one provides additional detail
+    </div>
+
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
