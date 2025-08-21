@@ -59,4 +59,5 @@ p {
     font-style: italic;
     margin-top: auto;
     /* pinning footer to the bottom */
+    border-radius: 14px;
 }
