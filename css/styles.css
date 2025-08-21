@@ -48,6 +48,10 @@ p {
     color: lightsalmon;
 }
 
+#highlight {
+    color: lightsalmon;
+}
+
 .footer {
     background-color: rgb(90, 90, 90);
     padding: 14px;

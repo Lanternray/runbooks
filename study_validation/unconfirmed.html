@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Unconfirmed Status (MVU, NMU)</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>Unconfirmed Status (MVU, NMU)</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>The goal of Study Validation is to keep the Millennium and Archive data in sync. When Archive receives the study, it send an S-Notify to Millennium and enters an 'Announced' status. Millennium receives the data via S-Notify and attempts to perform an Exact Match (if receiving the Millennium study instance UID) or an AutoMatch (non-Millennium UID, using automatch rules defined to identify matching exams by criteria defined). When the match attempt begins, the Millennium side enters a "Matched Viewable Unconfirmed" state and sends a U-Notify to update the archive with the Millennium data; and remains in this state until receiving confirmation back from Archive that it's in a 'Validated' state.</p>
+
+    <h2>ITEMS FOR INVESTIGATION</h2>
+    <ul>
+        <li>Accession Number</li>
+        <li>Study Instance UID (SIUID)</li>
+    </ul>
+
+    <h2>SERVERS/SERVICES INVOLVED</h2>
+    <ul>
+        <li>SCP 353</li>
+        <li>SCP 354</li>
+        <li>Archive</li>
+    </ul>
+
+    <h2>STEPS</h2>
+    <p>Collect data from the Millennium IM tables for reference <span id="highlight">(IM_STUDY, IM_ACQUIRED_STUDY)</span></p>
+    <p>It is also helpful to have the Match History and U-Notify History for reference <span id="highlight">(IM_MATCH_EVENT, IM_U_NOTIFY)</span></p>
+    <p>Review the <span id="highlight">VALIDATION_STATUS</span> on the archive for reference.</p>
+    <p>If Archive still has 'Announced' status: open <span id="highlight">MatchListMgmt.exe</span>, find procedure and click the "<span id="highlight">Validate</span>" button. If it does not process successfully, review the 354 logs for cause of failure (354 logs because you're manually resubmitting the U-Notify via utility). You should see the U_NOTIFY_ID in the transaction.</p>
+    <p>If Archive has 'Validated' status: open <span id="highlight">MatchListMgmt.exe</span>, find procedure and click the "<span id="highlight">Validate</span>" button. Right-click the row and select "Set to Done". If this fails, review 354 logs for cause of failure. (354 logs because you're manually resubmitting the U-Notify via utility).</p>
+    <p>If the above do not resolve the issue, further investigation must be performed to identify why Millennium/Archive are out of sync.</p>
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
