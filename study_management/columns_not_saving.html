@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>MatchListMgmt: Columns Sorting Not Saving</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>MatchListMgmt: Columns Sorting Not Saving</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>When attempting to sort/reorder columns, the order is not saving when refreshing the view. Notably, there is an empty column positioned first. This is caused due to corrupt application ini for the user, in particular the Pos=# for the column. Clearing the application for that section (Study List in this case) will resolve the issue.</p>
+
+    <h2>ITEMS FOR INVESTIGATION</h2>
+    <ul>
+        <li>Username/UserID (person_id from PRSNL)</li>
+        <li>MTA (workflow)</li>
+    </ul>
+
+    <h2>STEPS</h2>
+    <p>Query the application_ini table for the user and see what's defined for Pos=0.</p>
+
+    <div class="code-snippet">
+        select * from application_ini <br>
+        where application_number=477601 <br>
+        and person_id = 21373771 <br>
+        and section = 'Study List'</div>
+
+    <p>If the application ini neds to be cleared, then perform the following:</p>
+    <p>Ensure the user is logged out of the application. If the app ini is cleared while the application is still open, it will just rewrite the same bad data as the application is closed since it's still running with bad settings in place.</p>
+    <p>Clear the application_ini for that section:</p>
+    <div class="code-snippet">update into application_ini
+        set parameter_data = ' ' <br>
+        where application_number=477601 <br>
+        and person_id = 21373771 <br>
+        and section = 'Study List'</div>
+        <p>Have the user log back in and retest.</p>
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
