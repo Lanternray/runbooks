@@ -43,7 +43,7 @@
         and where created_dt_tm &lt; sysdate-insertDuration
     </div>
 
-    <p>If the amount is greater than 1000, <a href="">Class Routing should be setup</a> to resolve the issue. If there's a large volume to clear, then <span id="highlight">mmf_camm_purge_xr_charts</span> should be run to bring the volume back down to manageable numbers.
+    <p>If the amount is greater than 1000, <a href="setup_class_routing.html">Class Routing should be setup</a> to resolve the issue. If there's a large volume to clear, then <span id="highlight">mmf_camm_purge_xr_charts</span> should be run to bring the volume back down to manageable numbers.
     
     <p><strong><span id="highlight">CRITICAL NOTE</span></strong>: when running the mmf_camm_purge_xr_charts <span id="highlight">you MUST sign into CCL successfully (CERNER account)</span>. Failing to do so and/or bypassing the login when running the script will result in the rows in   Millennium being purged, but the archive will not get called to purge the objects. This could result in millions of rows being orphaned on the archive.</p>
 
