@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Websphere SystemOut Logs</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>Websphere SystemOut Logs</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>Although Splunk can give a high-level of errors, it's often needed to be able to grab the SystemOut.log for further detail when troubleshooting.</p>
+
+    <h2>ITEMS FOR INVESTIGATION</h2>
+    <ul>
+        <li>ODR Hostname</li>
+        <li>Identify REST service for reference</li>
+    </ul>
+
+    <h2>STEPS</h2>
+    <p>First, you will need to get the hostname for the primary ODR server. You can obtain this for RHO clients at: <a href="https://cwx2.cerner.com/myRemedy/">myRemedy</a></p>
+    <img src="../images/systemout1.png" alt="ODR nodes" width="1022" height="95"><br>
+
+    <p>Using the hostname, fulfill the URL: <br>
+    <span id="highlight">http://&lt;insertODRhostname&gt;:9060/ibm/console/logon.jsp</span></p>
+
+    <p>Typically, try the first listed. If it doesn't work or you don't find the service you're looking for, try the next one.</p>
+    <p>To login, you can use your Associate account. If that does not work, look for a "WAS" account from the myRemedy directory above.</p>
+
+    <p>Expand "<span id="highlight">Applications</span>" and select "<span id="highlight">All Applications"</span></p>
+    <img src="../images/systemout2.png" alt="Applications" loading="lazy" width="386" height="226"><br>
+
+    <p>You can click the '<span id="highlight">filter</span>' button and search for the service you're looking for. Then select the "ACTIVE" one to view that service.</p>
+    <img src="../images/systemout3.png" alt="Filter" loading="lazy" width="376" height="170"><br>
+
+    <p><strong><span id="highlight">DO NOT CLICK REPEATEDLY if nothing happens, it can take a little while to load.</span></strong></p>
+    <p>Under "Detail Properties", click "Target specific application status"</p>
+    <img src="../images/systemout4.png" alt="Application status" loading="lazy" width="544" height="192"><br>
+
+    <p>This will display the cluster the deployed ear is mapped to. Take note, and click on it.</p>
+    <img src="../images/systemout5.png" alt="Cluster" loading="lazy" width="913" height="162"><br>
+
+    <p>Under 'Additional Properties', click on Cluster members</p>
+    <img src="../images/systemout6.png" alt="Cluster members" loading="lazy" width="453" height="164"><br>
+
+    <p>This will list out the WAS nodes (members) of that cluster. This can change when the JVM is cycled. All of the currently active/running servers under that cluster will have the green arrrow.</p>
+    <img src="../images/systemout7.png" alt="Servers status" loading="lazy" width="910" height="424"><br>
+
+    <p>You will need to grab the SystemOut.logs from each instance listed unless you can find the specific one that the transaction you're looking for hit.</p>
+
+    <p>Note that some state "was01" and "was01_1". These are on the <em>same</em> node, just separate instances - they WILL be separate logs.</p>
+
+    <p>Connect to the WAS node, and navigate through the directory: <br>
+    <spank id="highlight">/opt/websphere/appserver/profiles/appsrv01/logs</span></p>
+
+    <p>Note, there are separate directories for each instance mentioned above - so you may need to check which one has the transactions you're looking for, or grab both.</p>
+    <img src="../images/systemout8.png" alt="Log location" loading="lazy" width="879" height="592">
+
+    <p>The SystemOut.log folder will be located in that directory.</p>
+
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
