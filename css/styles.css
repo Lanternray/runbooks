@@ -68,3 +68,21 @@ p {
     /* pinning footer to the bottom */
     border-radius: 14px;
 }
+
+table {
+    font-size: 14px;
+    text-align: left;
+    background-color: rgb(56, 56, 56);
+    width: 650px;
+}
+
+td {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    border-top: 1px dashed rgb(109, 109, 109);
+    padding-right: 4px;
+}
+
+td#left-column {
+    width: 120px;
+}

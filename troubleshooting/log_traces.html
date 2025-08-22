@@ -10,7 +10,7 @@
 <body>
     
     <div class="header">
-        <h1>Topic</h1>
+        <h1>Log Traces</h1>
         <p>Back to <a href="../">Home</a></p>
     </div>
     <hr>
@@ -18,15 +18,73 @@
     <h2>BACKGROUND</h2>
     <p>This is a collection of log traces for the various servers/services we support.</p>
 
-    <h2>STEPS</h2>
-    <p>Enter steps Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium quod, exercitationem commodi atque adipisci cum mollitia nulla est blanditiis alias obcaecati iste. Cupiditate sapiente dolores ducimus veniam quos nam vero.</p>
+    <h2>SCP 354</h2>
+    <table>
+        <tr>
+            <th>Usage</th>
+            <th>Trace</th>
+        </tr>
+        <tr>
+            <td id="left-column">general</td>
+            <td>com.cerner.biz.mmf.mom.marge</td>
+        </tr>
+        <tr>
+            <td id="left-column">digital objects</td>
+            <td>com.cerner.mmf.camm.millennium</td>
+        </tr>
+        <tr>
+            <td id="left-column">Services Directory Lookup 477783</td>
+            <td>com.cerner.exodus.service.discovery.ServicesDirectory</td>
+        </tr>
+        <tr>
+            <td id="left-column">study validation</td>
+            <td>com.cerner.biz.mmf.studyvalidation</td>
+        </tr>
+        <tr>
+            <td id="left-column">encounter/org security</td>
+            <td>com.cerner.biz.mmf.mom.marge.ml.OrgSecurityInterceptorFactory <br><br>
+                for additional details: <br>
+                com.cerner.msvc.encounter
+            </td>
+        </tr>
+        <tr>
+            <td id="left-column">CPS Post Validation/UNotify</td>
+            <td>com.cerner.mmf.archive.proxy.impl.cps</td>
+        </tr>
+    </table>
 
-    <div class="code-snippet">
-        code snippet example</div>
-
-    <p>353 logs (CAMM6):</p>
-    <div class="code-snippet">
-        index=client_<mnemonic>_millennium_services source=*<domain>*cmb_0353*log</div>
+    <h2>SCP 353</h2>
+        <table>
+        <tr>
+            <th>Usage</th>
+            <th>Trace</th>
+        </tr>
+        <tr>
+            <td id="left-column">MWL</td>
+            <td>com.cerner.service.dicom.qrscp.FindService</td>
+        </tr>
+        <tr>
+            <td id="left-column">Services Directory Lookup 477783</td>
+            <td>com.cerner.exodus.service.discovery.ServicesDirectory</td>
+        </tr>
+        <tr>
+            <td id="left-column">MWL (additional)</td>
+            <td>com.cerner.biz.modalityworklist</td>
+        </tr>
+        <tr>
+            <td id="left-column">MWL DICOM Tags</td>
+            <td>org.dcm4cheri.data.DcmObjectImpl</td>
+        </tr>
+        <tr>
+            <td id="left-column">study validation</td>
+            <td>com.cerner.biz.mmf.studyvalidation <br><br>
+            com.cerner.biz.mmf.studyvalidation.match.AutoMatchManager (AutoMatch specific)</td>
+        </tr>
+        <tr>
+            <td id="left-column">Study Match</td>
+            <td>com.cerner.mmf.pacs.study.match</td>
+        </tr>
+    </table>
 
     <br>
     <br>
@@ -34,6 +92,8 @@
     <div class="footer">
     author: Shane Raweewonrungjumrus
     </div>
+
+
 
 </body>
 
