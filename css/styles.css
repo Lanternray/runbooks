@@ -38,7 +38,7 @@ p {
 .code-snippet {
     border: 2px dashed coral;
     margin: 0px 0px 10px 8px;
-    padding: 4px;
+    padding: 4px 4px 8px 4px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 12px;
     max-width: 90%;

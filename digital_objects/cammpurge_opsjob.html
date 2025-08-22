@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>CAMM Purge Ops Jobs</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>CAMM Purge Ops Jobs</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>The most common use for the CAMM Purge Ops job is to purge XR (CHART) objects, as they can be a high volume content type and are temporary in nature. Due to the volume, the Ops Job can timeout since by default the CPMScript server has a timeout (killtime) at 2 minutes. Because of this, it's recommended to setup <span id="highlight">class routing for 477660</span> to a dedicated server with no killtime. In some cases, this is not enough due to a 30-minute timeout occurring at the system level. In those cases, if the daily volume is too large to be handled in one run - will need to adjust the ops job to run at multiple times throughout the day to manage the volume. Based on monitoring with multiple clients, the purge job appears to process at a rate of approximately 630/minute.</p>
+
+    <h2>ITEMS FOR INVESTIGATION</h2>
+    <ul>
+        <li>Job name</li>
+        <li>Control Group (OpsExec Server)</li>
+        <li>Application node job running on</li>
+        <li>Start/End times</li>
+    </ul>
+
+    <h2>SERVERS/SERVICES INVOLVED</h2>
+    <ul><li>Olympus</li></ul>
+
+    <h2>STEPS</h2>
+    <p>Determine how many objects qualify for the job. Get the <span id="highlight">dms_content_type_id</span> for CHART and the <span id="highlight">expiration_duration.</span></p>
+
+    <div class="code-snippet">
+        select dms_content_type_id, expiration_duration from dms_content_type <br>
+        where content_type_key = 'CHART'</div>
+
+    <p>Query for count of objects qualifying for purge.</p>
+
+    <div class="code-snippet">
+        select count(*) from dms_media_instance where dms_content_type_id = insertContentTypeID <br>
+        and where created_dt_tm &lt; sysdate-insertDuration
+    </div>
+
+    <p>If the amount is greater than 1000, <a href="">Class Routing should be setup</a> to resolve the issue. If there's a large volume to clear, then <span id="highlight">mmf_camm_purge_xr_charts</span> should be run to bring the volume back down to manageable numbers.
+    
+    <p><strong><span id="highlight">CRITICAL NOTE</span></strong>: when running the mmf_camm_purge_xr_charts <span id="highlight">you MUST sign into CCL successfully (CERNER account)</span>. Failing to do so and/or bypassing the login when running the script will result in the rows in   Millennium being purged, but the archive will not get called to purge the objects. This could result in millions of rows being orphaned on the archive.</p>
+
+    <p>Check to see if 477660 is class routed.</p>
+    <div class="code-snippet">
+        select request_number, requestclass from request <br>
+        where request_number=477660
+    </div>
+
+    <p>The requestclass will equal the cpmscript00x number. (requestclass=7 == cpmscript007)</p>
+
+    <p>In SCP, identify the server the class routing is bound to.</p>
+    <div class="code-snippet">find -prop binding *cpmscript00*</div>
+
+    <p>If class routing is setup but the volume that qualifies for the purge exceeds 17.5k, adjust the Ops Job to run more frequently throughout the day - particular during peak hours.</p>
+
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
