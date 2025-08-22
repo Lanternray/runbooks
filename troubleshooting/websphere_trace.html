@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Enable Trace in Websphere</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>Enable Trace in Websphere</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>In some cases, there may be a need to enable finer trace level logging to troubleshoot.</p>
+
+    <h2>ITEMS FOR INVESTIGATION</h2>
+    <ul>
+        <li>ODR Hostname</li>
+        <li>Package to set trace for</li>
+        <li>Cluster that service is mapped to</li>
+    </ul>
+
+    <h2>STEPS</h2>
+    <p>In the Websphere Admin Console on the left-hand side, expand '<span id="highlight">Troubleshooting</span>' and click on <span id="highlight">Logs and trace</span></p>
+
+    <img src="../images/screen1.png" alt="Logs and trace" width="386" height="146"><br>
+
+    <p>Look for the cluster the service is running on, you will need to enable tracing on <em>each</em> one (<em>that is active/running indicated by green arrow</em>).</p>
+    <img src="../images/screen2.png" alt="WAS nodes" width="908" height="234"><br>
+    
+    <p>Under 'General Properties', click on <span id="highlight">Change log detail levels</span></p>
+    <img src="../images/screen3.png" loading="lazy" alt="Change log details" width="408" height="144"><br>
+
+    <p>Note the default is "<strong>*=info</strong>", for reference if you need to set back to original.</p><br>
+
+    <strong><span id="highlight">IMPORTANT</span></strong>
+    <p>Take note of the Configuration and Runtime tabs</p>
+    <p>Typically, you will want to setup under the "<span id="highlight">Runtime</span>" tab. When setup under Runtime, the trace takes effect immediately and resets back to default when the JVM's are cycled. This is recommended to prevent a mistake when forgetting to remove the trace.</p>
+    <p>If set under "Configuration", the trace will stick even if the servers are cycled - which is why servers need to be restarted after setting up here. In some cases, this may be the better option - for instance when the issue is intermittent or not easily reproducible. But you MUST remember to remove the trace after it's no longer needed.</p>
+    <p>Under "Change log detail levels", expand <span id="highlight">Components and Groups</span></p>
+
+    <img src="../images/screen4.png" loading="lazy" alt="Components and groups" width="825" height="188"><br>
+
+    <p>Then expand "All Components" and drill down to the package you're needing to enable tracing for.
+    Click on it and select "<span id="highlight">finest</span>":</p>
+    <img src="../images/screen5.png" loading="lazy" alt="Tracing" width="514" height="386"><br>
+
+    <p>Afterwards, click the "OK" at the bottom. Then click "Review":</p>
+    <img src="../images/screen6.png" loading="lazy" alt="Review" width="687" height="142"><br>
+
+    <p>Check the "<span id="highlight">Synchronize changes with Nodes</span>", and "Save"</p>
+    <img src="../images/screen7.png" loading="lazy" alt="Synchronize changes" width="936" height="219"><br>
+
+    <p>You will see a current status for when the sync is complete. You can then navigate to the same location as the SystemOut.log, and you'll see the addition of a <span id="highlight">trace.log</span> with the trace output logged there. You will often want to grab <em>both</em>.</p>
+
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
