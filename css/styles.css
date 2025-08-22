@@ -35,6 +35,10 @@ p {
     margin: 8px;
 }
 
+.small-list {
+    font-size: 14px;
+}
+
 .code-snippet {
     border: 2px dashed coral;
     margin: 0px 0px 10px 8px;

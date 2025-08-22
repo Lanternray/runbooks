@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Setup Class Routing</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>Setup Class Routing</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>Since Ops Jobs route to CPMScript servers which have a killtime of 2 minutes, goal is to class route 477660 to a dedicated server with no killtime.
+    <em>Note: that some systems may have an enforced timeout at 30 minutes although a killtime on the server is not set or set higher.</em></p>
+
+    <h2>STEPS</h2>
+    <p>First verify that request class routing has not already been defined. If the requestclass returned is NOT "0", then class routing has already been setup for that specified cpmscript00X.</p>
+    
+    <div class="code-snippet">
+        select request_number,requestclass from request <br>
+        where request_number=477660</div>
+
+    <p>in &lt;SCP&gt;, do this command to find existing cpmscript bindings. Identify number that doesn't already exist. For example, if cpmscript001-5 exists, you will define cpmscript006.</p>
+    <div class="code-snippet">find -prop binding cpmscript0*</div>
+
+    <p>In &lt;SCP&gt; do command 'dir' to list available servers. Custom servers are range <span id="highlight">400-419</span>. You can use a server that does <strong>NOT</strong> already exist.</p>
+    <p>In &lt;SCP&gt; create the new server determined from the previous step and the requestclass. <span id="highlight">This must be done on each app node.</span></p>
+    <div class="code-snippet">
+        copy 51 4XX -descrip "CPM Script00X" -inst 0 -prop binding=cpmscript00X <br><br>
+        example: <br>
+        copy 51 400 -descrip "CPM Script006" -inst 0 -prop binding=cpmscript006
+    </div>
+
+    <p>For the <span id="highlight">application node the Control Group for the Ops Job is running on, perform the following.</span></p>
+    <ol>
+    <li class="small-list">remove killtime: <span id="highlight">modify 4xx -prop killtime=</span></li>
+    <li>start the server: <span id="highlight">start 4xx</span></li>
+    <li>once confirmed running, set instance to 1: <span id="highlight">modify 400 -inst 1</span></li>
+    </ol>
+
+    <p>In &lt;CCL&gt; you need to update the entry in request server to point to the number of the cpmscript00X binding above.</p>
+    <div class="code-snippet">
+        update into request set requestclass=X <br>
+        where request_number=477660
+    </div>
+
+    <p>After complete, MUST CYCLE server <span id="highlight">50</span> to recache. Then cycle the server or restart the frontend app that sends this request to be processed, in this case - the <span id="highlight">OpsExec server</span> tied to the ops job.</p>
+    <p>In some cases the OpsExec Server looks like it restarted but did not actually do so (check the server startup time), you may need to "STOP" and "START" the server manually.</p>
+    <p>In some cases if the OpsExec server is stuck in a "stopping" state, you may need to "kill" the server instance and start it back up manually.</p>
+
+    <p>From my experience, <span id="highlight">if class routing is not taking effect</span> - will want to cycle in this order:</p>
+    <ul>
+        <li class="small-list">Cycle the new class routed server</li>
+        <li class="small-list">Cycle SCP 50</li>
+        <li class="small-list">Stop/Start OpsExec Server (kill if stuck stopping)</li>
+    </ul>
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
