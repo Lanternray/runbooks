@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Feature Toggles Not Taking Effect</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1>Feature Toggles Not Taking Effect</h1>
+        <p>Back to <a href="../">Home</a></p>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>Feature Toggles are managed/configured in Cloud. Sometimes a case will arise where Feature Toggles are enabled but not taking effect in Millennium as expected. For example, a client has the "Media Gallery Web" Feature Toggle enabled, but the Legacy version is still loading.</p>
+
+    <h2>ITEMS FOR INVESTIGATION</h2>
+    <ul>
+        <li>Workflow to identify what MPage is involved and to reproduce issue</li>
+        <li>Current settings in Cloud. If unable access client's Features, may need to engage Cloud Enablement support to provide what's enabled for client</li>
+        <li>Logs from MPages if applicable</li>
+    </ul>
+
+    <h2>STEPS</h2>
+    <p>From the backend app tier, call apptest to test request <span id="highlight">2030001</span> for an impacted user to see what Feature Toggles are returned</p>
+
+    <div class="code-snippet">
+        apptest -srv <br><br>
+
+        Request Name/Number: 2030001 <br><br>
+
+        REQUEST
+        1 SRV_STRING (C0) username     CERNER</div>
+
+    <p>In the prompt, you should only have to provide the <span id="highlight">request number</span> and <span id="highlight">username</span>. Leave the other values blank.</p>
+    <p>Check to see what Feature Toggles are being returned.</p>
+    <p>If you do not see the one you're needing and confirmed the Feature Toggles enabled, then cycle SCP 2030 (Feature Toggle Management). This should resolve the issue.</p>
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
