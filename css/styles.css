@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 14px;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .header {
