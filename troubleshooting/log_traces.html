@@ -50,6 +50,7 @@
         <div class="column right">com.cerner.mmf.archive.proxy.impl.cps</div>
     </div>
 
+    <br>
     <h2>SCP 353</h2>
     <div class="two-column-container">
         <div class="column left tbl-header">Usage</div>
@@ -81,6 +82,60 @@
         <div class="column right">com.cerner.mmf.pacs.study.match</div>
     </div>
 
+    <br>
+    <h2>Websphere</h2>
+    <div class="two-column-container">
+        <div class="column left tbl-header">Usage</div>
+        <div class="column right tbl-header">Trace</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">OAuth</div>
+        <div class="column right">com.cerner.mmf.util.net.oauth.millennium</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">REST URL <br> Get full CAMM URL calls</div>
+        <div class="column right">com.cerner.mmf.util.net</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">MWL (CPS/REST)</div>
+        <div class="column right">com.cerner.biz.mmf.pacs.util</div>
+    </div>
+
+    <br>
+    <h2>SkyVue</h2>
+    <p>To enable tracing in Skyvue, add the following line to the SkyVue.ini file, where &lt;package&gt; represent the specific package level where tracing is desired. Multiple packages are delimited by a space:</p>
+    <div class="code-snippet">
+        -Dcom.cerner.bedrock.instrument.logging.eclipse.tracing.enabled=" &lt;package&gt; &lt;package&gt; ... "
+    </div>
+
+    <div class="two-column-container">
+        <div class="column left tbl-header">Usage</div>
+        <div class="column right tbl-header">Trace</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Archive interaction</div>
+        <div class="column right">com.cerner.viewer.dicom.biz.amalgam</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Base application</div>
+        <div class="column right">com.cerner.indigo.application</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Southern service</div>
+        <div class="column right">com.cerner.mmf.enterprise.southern <br>com.cerner.mmf.util.net</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Capture URLs MMF</div>
+        <div class="column right">com.cerner.mmf.util.net</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Image Caching</div>
+        <div class="column right">com.cerner.indigo.cache.sage</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Integration</div>
+        <div class="column right">com.cerner.indigo.integration</div>
+    </div>
 
 
     <br><br><br>

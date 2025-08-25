@@ -30,6 +30,10 @@ ul {
     margin: 4px 0px 20px 0px;
 }
 
+a {
+    font-size: 14px;
+}
+
 p {
     font-size: 14px;
     margin: 8px;
