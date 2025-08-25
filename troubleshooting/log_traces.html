@@ -20,13 +20,13 @@
         <a href="#scp_353">SCP 353</a>
         <a href="#websphere">Websphere</a>
         <a href="#skyvue">SkyVue</a>
-        <a href="">Splunk</a>
+        <a href="#splunk">Splunk</a>
     </nav>
 
     <h2>BACKGROUND</h2>
     <p>This is a collection of log traces for the various servers/services we support.</p>
     <br>
-    
+
     <h2 id="scp_354">SCP 354</h2>
     <div class="two-column-container">
         <div class="column left tbl-header">Usage</div>
@@ -149,8 +149,43 @@
     </div>
     <p><em>back to <a href="#top">top</a></em></p>
 
+    <br>
+    <h2 id="splunk">Splunk</h2>
+    <p>Splunk doesn't search <em>all</em> indexes by default. If performing a broad query, may need to define "<span id="highlight">index=*</span>"</p>
+    <div class="two-column-container">
+        <div class="column left">Production</div>
+        <div class="column right">logs.oem.cerner.com</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Sandbox</div>
+        <div class="column right">logs.sandboxcerner.com</div>
+    </div>
 
-    <br><br><br>
+    <br>
+    <h4>Modality Worklist</h4>
+    <div class="two-column-container">
+        <div class="column left">FindService transactions</div>
+        <div class="column right">index=client_cern_empl_millennium_services* source=*d_p9900*cmb_0353* FindService</div>
+    </div><br>
+
+    <h4>Study Validation</h4>
+        <div class="two-column-container">
+        <div class="column left">Look for <span id="highlight">uNotifyId </span>or <span id="highlight">imAcquiredStudyId</span></div>
+        <div class="column right">index=client_lgmc_la_millennium_services source=*p329*cmb*353*log <span id="highlight">36633780</span></div>
+    </div><br>
+
+    <h4>CAMM7</h4>
+    <div class="two-column-container">
+        <div class="column left">Production <br>logs.oem.cerner.com</div>
+        <div class="column right">index=client_cern_cps_camm_services</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Sandbox <br>logs.sandboxcerner.com</div>
+        <div class="column right">index=cern_cps</div>
+    </div><br>    
+
+
+    <br><br><br><br>
     <div class="footer">
     author: Shane Raweewonrungjumrus
     </div>
