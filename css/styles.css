@@ -81,6 +81,7 @@ td {
     font-size: 12px;
     border-top: 1px dashed rgb(109, 109, 109);
     padding-right: 4px;
+    max-width: 150px;
 }
 
 td#left-column {
