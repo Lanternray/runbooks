@@ -90,7 +90,7 @@ p {
 
 .column.right {
   flex: 1; /* Flex right column to take remaining space */
-  min-width: 100%;
+  min-width: 30rem;
 }
 
 .tbl-header {
