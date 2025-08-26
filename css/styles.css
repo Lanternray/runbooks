@@ -103,8 +103,8 @@ p {
 }
 
 .column.left {
-  flex: 1;
-  max-width: 170px;
+  flex: 0 0 25%;
+  /* max-width: 170px; */
   word-break: break-word;
 }
 
