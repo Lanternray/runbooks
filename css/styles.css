@@ -5,7 +5,7 @@
 }
 
 html {
-    max-width: 900px;
+    
 }
 
 #nav-traces {
@@ -21,6 +21,7 @@ body {
     flex-direction: column;
     padding: 14px;
     min-height: 100vh;
+    max-width: 900px;
 }
 
 .header {
