@@ -99,18 +99,18 @@ p {
   border: 1px solid #ccc;
   font-family: 'Courier New', Courier, monospace;
   font-size: 12px;
-  max-width: 400px;
   word-break: break-word;
 }
 
 .column.left {
-  flex: 0 0 45%;
+  flex: 1;
+  max-width: 170px;
   word-break: break-word;
 }
 
 .column.right {
   flex: 1; /* Flex right column to take remaining space */
-  /* min-width: 30rem; */
+  max-width: 600px;
   word-break: break-word;
 }
 
