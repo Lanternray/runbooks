@@ -18,6 +18,29 @@ body {
     flex: 1;
 }
 
+.content {
+    padding: 1rem;
+}
+
+.code-snippet {
+    padding: 1rem;
+    word-break: break-word;
+    border: 1px solid white;
+    max-width: 800px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+}
+
+/* .code-snippet {
+    border: 1px solid white;
+    word-wrap: break-word;
+    width: 800px;
+    padding: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    word-break: break-word;
+} */
+
 .header, .footer {
     background-color: rgb(228, 74, 18);
     border-radius: 12px;
