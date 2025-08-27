@@ -36,6 +36,10 @@ body {
     padding: 10px;
 }
 
+.header-title {
+    font-size: 24px;
+}
+
 h2 {
     margin: 10px 0px 4px 0px;
 }
