@@ -120,3 +120,8 @@ p {
     font-size: 14px;
     font-weight: bold;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
