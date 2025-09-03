@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Enable Inspect Element</title>
+</head>
+
+<body>
+    
+    <div class="header">
+        <h1 class="header-title">Enable Inspect Element (DevTools)</h1>
+        <a href="../" class="button">Back to Home</a>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>In many cases, Citrix teams are now implementing Citrix policies which lock down the ability to access DevTools from the MPages which are necessary for troubleshooting.</p>
+    <p>The following can be performed to allow access to the "Inspect" element in the context menu. This is assuming the account performing these steps has '<span id="highlight">modify</span>' privileges for the registry.</p>
+
+    <h2>STEPS</h2>
+    <p>First, launch <span id="highlight">CMD prompt as Administrator</span>.</p>
+    <p>Then run the following: </p>
+    <div class="code-snippet">
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v DeveloperToolsAvailability /t REG_DWORD /d 1 /f</div>
+
+    <p>This should now allow the <span id="highlight">Inspect</span> element to be available and/or access to DevTools.</p>
+    <p>If not, or if permissions to do so are denied, you will need to work with the <span id="highlight">OHH Citrix</span> group for further assistance to provide access.</p>
+
+    <br>
+    <br>
+
+    <div class="footer">
+    author: Shane Raweewonrungjumrus
+    </div>
+
+</body>
+
+
+
+</html>
