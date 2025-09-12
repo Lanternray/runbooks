@@ -23,6 +23,7 @@ html {
 .button-nav {
     padding: 4px;
     border-radius: 4px;
+    box-shadow: 0 4px 4px black;
 }
 
 .button-nav:hover {
