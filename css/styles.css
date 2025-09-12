@@ -16,6 +16,19 @@ html {
     padding: 1rem 1rem;
 }
 
+#nav-traces > a {
+    text-decoration: none;
+}
+
+.button-nav {
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.button-nav:hover {
+    background-color: rgb(80, 80, 80);
+}
+
 body {
     background-color: rgb(61, 61, 61);
     display: flex;
