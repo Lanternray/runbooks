@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Media Gallery Web Stuck Loading</title>
+</head>
+
+<body>
+    
+    <div class="header" id="top">
+        <h1 class="header-title">Media Gallery Web Stuck Loading</h1>
+        <a href="../" class="button">Back to Home</a>
+    </div>
+    <hr>
+
+    <h2>BACKGROUND</h2>
+    <p>This issue presents itself in Media Gallery where it just states "Loading..." endlessly. In the devtool logs, there are no indications of media-gallery being called. This can be caused by the Orion Embedded URL setup being missing or misconfigured.</p>
+
+    <h2>STEPS</h2>
+    <p>You can reference the <a href="https://wiki.cerner.com/display/public/reference/Configure+Workflow+Cloud+Components" target="_blank" rel="noreferrral">full instructions here</a>, in case anything else may be amiss. Contact the <a href="https://oracle.enterprise.slack.com/archives/C05V5S1E8QH" target="_blank" rel="noreferrral"><span id="highlight">#ww-ohai-orion-wfs</span></a> Slack channel if you need further assistance.</p><br>
+
+    <p>1. Check if the embedded Orion URL is defined:</p>
+    <div class="code-snippet">
+        select * from dm_info <br>
+        where info_domain = "ORION" <br>
+        and info_name = "EMBEDDED_BASE_URL"</div>
+
+    <p>2. If nothing returns, it needs to be defined. Provide the appropriate URL from the list below determined by region.</p>
+    <div class="code-snippet">
+        insert into dm_info set <br>
+        info_char = "xxxxx",<br>
+        info_domain = "ORION",<br>
+        info_name = "EMBEDDED_BASE_URL",<br>
+        updt_dt_tm = cnvtdatetime(curdate,curtime3)
+    </div>
+
+    <p>3. If row returned, review the list from below and ensure the appropriate URL is defined determined by region.</p>
+    <div class="code-snippet">
+        update into dm_info <br>
+        set info_char = "xxxxx", <br>
+        updt_dt_tm = cnvtdatetime(curdate,curtime3) <br>
+        where info_domain = "ORION" and INFO_NAME = "EMBEDDED_BASE_URL"
+    </div>
+
+    <br>
+    <h4>Embedded Servers Orion URLs</h4>
+    <div class="two-column-container">
+        <div class="column left">US PROD</div>
+        <div class="column right">https://embedded.cerner.com/embedded/content</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">US NonProd</div>
+        <div class="column right">https://embedded.sandboxcerner.com/embedded/content <br>
+        https://embedded.applications.sandboxcerner.com/embedded/content
+        </div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Sweden</div>
+        <div class="column right">https://embedded.emea-2.cerner.com/embedded/content</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Australia</div>
+        <div class="column right">https://embedded.au.cernerpowerchart.net/embedded/content <br>
+        https://embedded.applications.au.cerner.com/embedded/content
+        </div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">Canada</div>
+        <div class="column right">https://embedded.ca.cernerpowerchart.net/embedded/content <br>
+        https://embedded.applications.ca.cerner.com/embedded/content
+        </div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">UK</div>
+        <div class="column right">https://embedded.eu.cerner.com/embedded/content</div>
+    </div>
+    <div class="two-column-container">
+        <div class="column left">UAE</div>
+        <div class="column right">https://embedded.applications.uae-1.cerner.com/embedded/content</div>
+    </div>
+
+    <br>
+    <br>
+
+    <p><em>back to <a href="#top">top</a></em></p>
+
+    <div class="footer">
+    &copy; Shane Raweewonrungjumrus 2025
+    </div>
+
+</body>
+
+
+
+</html>
