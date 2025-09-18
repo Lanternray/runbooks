@@ -9,6 +9,10 @@ html {
     justify-content: center;
 }
 
+li {
+    font-size: 14px;
+}
+
 #nav-traces {
     display: flex;
     gap: 10px;
@@ -104,6 +108,11 @@ p {
 
 #highlight {
     color: lightsalmon;
+}
+
+#dithered {
+    font-style: italic;
+    color: rgb(160, 160, 160);
 }
 
 .footer {
