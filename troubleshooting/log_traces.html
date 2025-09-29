@@ -116,9 +116,10 @@
     <br>
     <h2 id="skyvue">SkyVue</h2>
     <p>To enable tracing in Skyvue, add the following line to the SkyVue.ini file, where &lt;package&gt; represent the specific package level where tracing is desired. Multiple packages are delimited by a space:</p>
-    <div class="code-snippet">
-        -Dcom.cerner.bedrock.instrument.logging.eclipse.tracing.enabled=" &lt;package&gt; &lt;package&gt; ... "
+    <div class="code-snippet" id="snippet">
+        -Dcom.cerner.bedrock.instrument.logging.eclipse.tracing.enabled=" &lt;package&gt; "
     </div>
+    <button id="resetBtn">Reset</button><br>
 
     <div class="two-column-container">
         <div class="column left tbl-header">Usage</div>
@@ -134,7 +135,7 @@
     </div>
     <div class="two-column-container">
         <div class="column left">Southern service</div>
-        <div class="column right">com.cerner.mmf.enterprise.southern <br>com.cerner.mmf.util.net</div>
+        <div class="column right">com.cerner.mmf.enterprise.southern</div>
     </div>
     <div class="two-column-container">
         <div class="column left">Archive / URL's</div>
@@ -190,6 +191,7 @@
     </div>
     <p><em>back to <a href="#top">top</a></em></p>
 
+    <script src="skyvueTrace.js" defer></script>
 
     <br><br><br><br>
     <div class="footer">
