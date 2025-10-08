@@ -11,6 +11,7 @@ html {
 
 li {
     font-size: 14px;
+    padding-bottom: 4px;
 }
 
 #nav-traces {
@@ -74,8 +75,9 @@ h2 {
 }
 
 ul {
-    margin: 4px 0px 20px 0px;
+    margin: 0px 0px 20px 0px;
     list-style-type: none;
+    padding-left: 20px;
 }
 
 a {
