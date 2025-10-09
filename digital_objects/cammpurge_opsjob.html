@@ -15,6 +15,7 @@
     </div>
     <hr>
 
+    <div class="content">
     <h2>BACKGROUND</h2>
     <p>The most common use for the CAMM Purge Ops job is to purge XR (CHART) objects, as they can be a high volume content type and are temporary in nature. Due to the volume, the Ops Job can timeout since by default the CPMScript server has a timeout (killtime) at 2 minutes. Because of this, it's recommended to setup <span id="highlight">class routing for 477660</span> to a dedicated server with no killtime. In some cases, this is not enough due to a 30-minute timeout occurring at the system level. In those cases, if the daily volume is too large to be handled in one run - will need to adjust the ops job to run at multiple times throughout the day to manage the volume. Based on monitoring with multiple clients, the purge job appears to process at a rate of approximately 630/minute.</p>
 
@@ -63,6 +64,7 @@
 
     <br>
     <br>
+    </div>
 
     <div class="footer">
     &copy; Shane Raweewonrungjumrus 2025

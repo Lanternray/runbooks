@@ -15,6 +15,7 @@
     </div>
     <hr>
 
+    <div class="content">
     <h2>BACKGROUND</h2>
     <p>Orders that are expected to appear on the worklist are not showing. The Modality Worklist is a list of exams to be performed on the device, that is displayed physically on the modality itself (X-Ray machine for example). This is a Radiology order placed in Millennium, and our worklist service returns the exams based on the room the exam's routed to and how the imaging device is configured in the system.</p>
     <p><strong><span id="highlight">Note:</span></strong> The modality worklist does NOT always mean it will be our (CAMM) worklist service. Many clients may rather be pointed to an interfaced worklist/broker that supplies a worklist via HL7. If they use our worklist, the device would be pointed to a worklist AET of "MWL_CERNER" (default AET, but has the potential to be defined differently.) This would be configured on the app node in $cer_mgr\java-system.cerner within the 'QRSCP' section:</p>
@@ -101,6 +102,7 @@
 
     <br>
     <br>
+    </div>
 
     <div class="footer">
     &copy; Shane Raweewonrungjumrus 2025

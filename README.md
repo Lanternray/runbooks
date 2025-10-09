@@ -1,6 +1,6 @@
 <!-- 
 
 update-1.0
-- Adding menu
+- Layout/design changes
 
 -->
