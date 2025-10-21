@@ -32,18 +32,18 @@ li {
     padding: 1rem 0;
 }
 
-#nav-traces > a {
+#nav-traces a {
     text-decoration: none;
+    padding: 0 6px;
 }
 
-.button-nav {
-    padding: 4px;
+#nav-traces li::marker {
+    content: ">";
+}
+
+#nav-traces a:hover {
+    background-color: hsl(0,0%,35%);
     border-radius: 4px;
-    box-shadow: 0 4px 4px black;
-}
-
-.button-nav:hover {
-    background-color: rgb(80, 80, 80);
 }
 
 body {
