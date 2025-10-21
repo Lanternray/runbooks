@@ -37,8 +37,8 @@ li {
     padding: 0 6px;
 }
 
-#nav-traces li::marker {
-    content: ">";
+#nav-traces ul {
+    list-style-type: ">";
 }
 
 #nav-traces a:hover {
