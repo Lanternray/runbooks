@@ -377,37 +377,68 @@ p {
 #nav-traces {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 16px 0;
+  gap: 10px;
+  padding: 20px 0;
   align-items: center;
 }
 
 #nav-traces a {
   text-decoration: none;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-surface);
+  padding: 10px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
   transition: all var(--transition-base);
+  color: var(--text-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+#nav-traces a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(129, 199, 132, 0.15), rgba(6, 182, 212, 0.08));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  border-radius: inherit;
 }
 
 #nav-traces a:hover {
-  background: rgba(129, 199, 132, 0.12);
+  background: var(--bg-elevated);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(129, 199, 132, 0.15), 0 0 0 1px rgba(129, 199, 132, 0.3);
+}
+
+#nav-traces a:hover::before {
+  opacity: 1;
+}
+
+#nav-traces a:active {
+  transform: translateY(0) scale(0.97);
 }
 
 #nav-traces ul {
-  list-style-type: ">";
+  list-style: none;
   margin: 0;
-  padding-left: 0;
+  padding: 0;
   display: flex;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 #nav-traces li {
   padding: 0;
+  margin: 0;
 }
 
 .two-column-container {
@@ -500,14 +531,35 @@ img {
   border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
-/* --- Back to Top Link --- */
-.content a[href="#top"] {
-  color: var(--accent-secondary);
-  font-size: 13px;
+/* --- Back to Top Button --- */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-header);
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg), 0 0 20px var(--accent-glow);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  line-height: 1;
 }
 
-.content a[href="#top"]:hover {
-  color: #67e8f9;
+#back-to-top:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg), 0 0 30px var(--accent-glow);
+}
+
+#back-to-top:active {
+  transform: scale(0.95);
 }
 
 /* --- Responsive --- */
