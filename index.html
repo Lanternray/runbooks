@@ -61,15 +61,65 @@
         <div class="category-section">
             <h2>Processes</h2>
             <ul>
-                <li><a href="process/taggingEngineer.html" class="main-page-link"><s>Tagging Engineer</s> (<i>deprecated</i>)</a></li>
+                <li><a href="process/taggingEngineer.html" class="main-page-link"><s>Tagging Engineer</s> (<i>deprecated</i>)<span class="tooltip-icon" onclick="toggleModal('deprecated-modal', event)" title="Why is this deprecated?">?</span></a>
+                </li>
             </ul>
         </div>
     </div>
 
     <button id="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">&#8593;</button>
 
+    <!-- Deprecated Modal -->
+    <div id="deprecated-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Why is this deprecated?</span>
+                <button class="modal-close" onclick="closeModal('deprecated-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This process deprecated as of 2026/06/25</p>
+                <p>Follow the new process outlined in Slack at <strong>#hippa-oh-camm-tag</strong></p>
+            </div>
+        </div>
+    </div>
+
     <div class="footer">
         &copy; Shane Raweewonrungjumrus 2025
     </div>
+    <script>
+        function toggleModal(modalId, event) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function closeModalOnOverlay(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal-overlay');
+                modals.forEach(function(modal) {
+                    modal.style.display = 'none';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
