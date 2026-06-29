@@ -486,13 +486,16 @@ img {
   box-shadow: var(--shadow-sm);
 }
 
-#resetBtn {
+#resetBtn,
+#copyBtn {
   max-width: 100px;
+  height: 32px;
   background: var(--bg-surface);
   border-radius: var(--radius-xl);
   margin-left: 8px;
   border: 1px solid var(--border-color);
   display: inline-flex;
+  vertical-align: middle;
   align-items: center;
   justify-content: center;
   padding: 6px 12px;
@@ -503,13 +506,15 @@ img {
   color: var(--text-secondary);
 }
 
-#resetBtn:hover {
+#resetBtn:hover,
+#copyBtn:hover {
   background: rgba(129, 199, 132, 0.12);
   border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
 
-#resetBtn:active {
+#resetBtn:active,
+#copyBtn:active {
   transform: scale(0.95);
 }
 
