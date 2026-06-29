@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +20,16 @@
             <h2>Study Validation</h2>
             <ul>
                 <li><a href="study_validation/snotify_failures.html" class="main-page-link">S-Notify Failures</a></li>
-                <li><a href="study_validation/unconfirmed.html" class="main-page-link">Unconfirmed Status (MVU, NMU)</a></li>
+                <li><a href="study_validation/unconfirmed.html" class="main-page-link">Unconfirmed Status (MVU, NMU)</a>
+                </li>
             </ul>
         </div>
 
         <div class="category-section">
             <h2>Study Management</h2>
             <ul>
-                <li><a href="study_management/columns_not_saving.html" class="main-page-link">MatchListMgmt: Columns Sorting Not Saving</a></li>
+                <li><a href="study_management/columns_not_saving.html" class="main-page-link">MatchListMgmt: Columns
+                        Sorting Not Saving</a></li>
                 <li><a href="study_management/modality_worklist.html" class="main-page-link">Modality Worklist</a></li>
             </ul>
         </div>
@@ -35,24 +38,30 @@
             <h2>Digital Objects</h2>
             <ul>
                 <li><a href="digital_objects/cammpurge_opsjob.html" class="main-page-link">CAMM Purge Ops Jobs</a></li>
-                <li><a href="digital_objects/setup_class_routing.html" class="main-page-link">Setup Class Routing for CAMM Purge Ops Job</a></li>
+                <li><a href="digital_objects/setup_class_routing.html" class="main-page-link">Setup Class Routing for
+                        CAMM Purge Ops Job</a></li>
             </ul>
         </div>
 
         <div class="category-section">
             <h2>Media Gallery</h2>
             <ul>
-                <li><a href="media_gallery/feature_toggle_not_working.html" class="main-page-link">Feature Toggles Not Taking Effect</a></li>
-                <li><a href="media_gallery/enableDevTools.html" class="main-page-link">Enable Inspect Element (DevTools)</a></li>
-                <li><a href="media_gallery/requestFeatureToggles.html" class="main-page-link">Request Feature Toggles</a></li>
-                <li><a href="media_gallery/medGalWebStuckLoading.html" class="main-page-link">Media Gallery Web Stuck Loading</a></li>
+                <li><a href="media_gallery/feature_toggle_not_working.html" class="main-page-link">Feature Toggles Not
+                        Taking Effect</a></li>
+                <li><a href="media_gallery/enableDevTools.html" class="main-page-link">Enable Inspect Element
+                        (DevTools)</a></li>
+                <li><a href="media_gallery/requestFeatureToggles.html" class="main-page-link">Request Feature
+                        Toggles</a></li>
+                <li><a href="media_gallery/medGalWebStuckLoading.html" class="main-page-link">Media Gallery Web Stuck
+                        Loading</a></li>
             </ul>
         </div>
 
         <div class="category-section">
             <h2>Troubleshooting</h2>
             <ul>
-                <li><a href="troubleshooting/websphere_trace.html" class="main-page-link">Enable Trace for REST in Websphere</a></li>
+                <li><a href="troubleshooting/websphere_trace.html" class="main-page-link">Enable Trace for REST in
+                        Websphere</a></li>
                 <li><a href="troubleshooting/systemout.html" class="main-page-link">Websphere SystemOut Logs</a></li>
                 <li><a href="troubleshooting/log_traces.html" class="main-page-link">Log Traces Collection</a></li>
             </ul>
@@ -61,7 +70,9 @@
         <div class="category-section">
             <h2>Processes</h2>
             <ul>
-                <li><a href="process/taggingEngineer.html" class="main-page-link"><s>Tagging Engineer</s> (<i>deprecated</i>)<span class="tooltip-icon" onclick="toggleModal('deprecated-modal', event)" title="Why is this deprecated?">?</span></a>
+                <li><a href="process/taggingEngineer.html" class="main-page-link"><s>Tagging Engineer</s>
+                        (<i>deprecated</i>)<span class="tooltip-icon" onclick="toggleModal('deprecated-modal', event)"
+                            title="Why is this deprecated?">?</span></a>
                 </li>
             </ul>
         </div>
@@ -79,6 +90,9 @@
             <div class="modal-body">
                 <p>This process deprecated as of 2026/06/25</p>
                 <p>Follow the new process outlined in Slack at <strong>#hippa-oh-camm-tag</strong></p>
+                <p> 1. Post to engineer Slack channel <br>
+                    2. They must approve first before ticket is reassigned <br>
+                    3. Then add "Tag" Task activity after approved and reassign</p>
             </div>
         </div>
     </div>
@@ -112,14 +126,15 @@
         }
 
         // Close modal on Escape key
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 const modals = document.querySelectorAll('.modal-overlay');
-                modals.forEach(function(modal) {
+                modals.forEach(function (modal) {
                     modal.style.display = 'none';
                 });
             }
         });
     </script>
 </body>
+
 </html>
